@@ -272,6 +272,7 @@ static ANSC_STATUS parse_addrattr(struct nlmsghdr *nlh)
        stAddrEvent.valid_lft     = valid_lifetime;
 
        CcspTraceInfo(("%s-%d [ADDR EVENT] RTM_DELADDR (address removed/expired) for '%s' interface, Info 'DELADDR|%s|%u|%u|%u'\n", __FUNCTION__, __LINE__, ifname, ipv6_addr, prefix_length, pref_lifetime, valid_lifetime));
+       wanmgr_sysevents_setWanState(WAN_LINK_DOWN_STATE);
        WanMgr_Handle_Dhcpv6_NetLink_Address_Event(&stAddrEvent);
        ret = ANSC_STATUS_SUCCESS;
     }
